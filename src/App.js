@@ -2,17 +2,6 @@ import React from 'react';
 import './App.css';
 
 import mycomponents from './config/components';
-import PipelineGapDemo from 'comp/pipeline-gap-demo';
-import PipelineHeaderDemo from 'comp/pipeline-header-demo';
-import PipelineInfoDemo from 'comp/pipeline-info-demo';
-import PipelineWeatherDemo from 'comp/pipeline-weather-demo';
-
-const components = {
-  'pipeline-gap-demo': PipelineGapDemo,
-  'pipeline-header-demo': PipelineHeaderDemo,
-  'pipeline-info-demo': PipelineInfoDemo,
-  'pipeline-weather-demo': PipelineWeatherDemo,
-};
 
 class App extends React.Component {
   constructor(props) {
@@ -22,13 +11,36 @@ class App extends React.Component {
       window.INIT_DATA || mycomponents : mycomponents;
     this.state = {
       pipelineComponents,
+      components: {},
     };
   }
 
+  async componentDidMount() {
+    this.state.pipelineComponents.map(async oneComponent => await this.addComponent(oneComponent.name));
+  }
+
+  addComponent = async type => {
+    console.log(`Loading ${type} component...`);
+  
+    import(`comp/${type}`)
+      .then(component => {
+        if (this.state.components[type]) return;
+        this.setState({
+          components: {
+            ...this.state.components,
+            [type]: component.default
+          }
+        });
+      })
+      .catch(error => {
+        console.error(`"${type}" not yet supported`);
+      });
+  };
+
   render() {
     const Components = this.state.pipelineComponents.map(oneComponent => {
-      const OneComponent = components[oneComponent.name];
-      return (
+      const OneComponent = this.state.components[oneComponent.name];
+      return OneComponent && (
         <OneComponent
           key={oneComponent.id}
           data-component-id={oneComponent.id}
