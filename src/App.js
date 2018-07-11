@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import mycomponents from './config/components';
+import PipelineGapDemo from 'comp/pipeline-gap-demo';
+
+const components = {
+  'pipeline-gap-demo': PipelineGapDemo,
+};
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    const pipelineComponents = (typeof window !== 'undefined') ?
+      window.INIT_DATA || mycomponents : mycomponents;
+    this.state = {
+      pipelineComponents,
+    };
+  }
+
   render() {
+    const Components = this.state.pipelineComponents.map(oneComponent => {
+      const OneComponent = components[oneComponent.name];
+      return (
+        <OneComponent
+          key={oneComponent.id}
+          data-component-id={oneComponent.id}
+          data-component-name={oneComponent.name}
+          config={oneComponent.data}/>);
+    });
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {Components}
       </div>
     );
   }
