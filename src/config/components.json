@@ -1,5 +1,35 @@
 [
   {
+    "id": "pipeline-header-demo",
+    "name": "pipeline-header-demo",
+    "data": {
+      "title": "页面可视化搭建框架",
+      "src": "https://avatars3.githubusercontent.com/u/38666040",
+      "link": "https://github.com/page-pipepline"
+    }
+  },
+  {
+    "id": "pipeline-info-demo",
+    "name": "pipeline-info-demo",
+    "data": {
+      "title": "框架特性",
+      "infoList": [
+        {
+          "info": "可视化页面搭建框架"
+        },
+        {
+          "info": "支持自由拓展页面组件"
+        },
+        {
+          "info": "自定义页面可配置字段"
+        },
+        {
+          "info": "模板工程/编辑器/后台服务解偶"
+        }
+      ]
+    }
+  },
+  {
     "id": "pipeline-gap-demo",
     "name": "pipeline-gap-demo",
     "data": {
@@ -7,5 +37,31 @@
       "textColor": "#000000",
       "text": "╮(＾ᴗ＾)╭",
       "height": 40
+    }
+  },
+  {
+    "id": "pipeline-weather-demo",
+    "name": "pipeline-weather-demo",
+    "data": {
+      "city": "深圳"
+    }
+  },
+  {
+    "id": "pipeline-gap-demo-1",
+    "name": "pipeline-gap-demo",
+    "data": {
+      "backgroundColor": "#FFFF00",
+      "textColor": "#000000",
+      "text": "(●＾ᴗ＾●)",
+      "height": 40
+    }
+  },
+  {
+    "id": "pipeline-header-demo-1",
+    "name": "pipeline-header-demo",
+    "data": {
+      "title": "开发者信息",
+      "src": "https://avatars3.githubusercontent.com/u/4598445",
+      "link": "https://github.com/CntChen"
     }
   }]

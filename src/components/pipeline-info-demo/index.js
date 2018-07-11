@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.less';
 
-class PipelineGapDemo extends React.Component {
+class PipelineInfoDemo extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,19 +20,28 @@ class PipelineGapDemo extends React.Component {
     };
 
     return (
-      <div className="gap-container"
-        style={this.styleObject}
+      <div className="info-container"
         { ...customAttributes }>
-        <p>{this.props.config.text}</p>
+        <div className="title">{this.props.config.title}</div>
+        {this.props.config.infoList.map((info, index) => {
+          return (
+            <div className="info"
+              key={index}>
+              <div className="one-info">
+                {info.info}
+              </div>
+            </div>
+          );
+        })}
       </div>);
   }
 }
 
-PipelineGapDemo.propTypes = {
+PipelineInfoDemo.propTypes = {
   config: PropTypes.object.isRequired
 };
 
 export {
-  PipelineGapDemo
+  PipelineInfoDemo
 };
-export default PipelineGapDemo;
+export default PipelineInfoDemo;

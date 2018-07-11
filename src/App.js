@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+
 import mycomponents from './config/components';
 import PipelineGapDemo from 'comp/pipeline-gap-demo';
+import PipelineHeaderDemo from 'comp/pipeline-header-demo';
+import PipelineInfoDemo from 'comp/pipeline-info-demo';
+import PipelineWeatherDemo from 'comp/pipeline-weather-demo';
 
 const components = {
   'pipeline-gap-demo': PipelineGapDemo,
+  'pipeline-header-demo': PipelineHeaderDemo,
+  'pipeline-info-demo': PipelineInfoDemo,
+  'pipeline-weather-demo': PipelineWeatherDemo,
 };
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
