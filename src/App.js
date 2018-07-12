@@ -2,6 +2,10 @@ import React from 'react';
 import './App.css';
 
 import mycomponents from './config/components';
+import PipelineGapDemo from 'comp/pipeline-gap-demo';
+import PipelineInfoDemo from 'comp/pipeline-info-demo';
+import PipelineHeaderDemo from 'comp/pipeline-header-demo';
+import PipelineWeatherDemo from 'comp/pipeline-weather-demo';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,12 +15,15 @@ class App extends React.Component {
       window.INIT_DATA || mycomponents : mycomponents;
     this.state = {
       pipelineComponents,
-      components: {},
+      components: {
+        'pipeline-gap-demo': PipelineGapDemo,
+        'pipeline-info-demo': PipelineInfoDemo,
+        'pipeline-header-demo': PipelineHeaderDemo,
+        'pipeline-weather-demo': PipelineWeatherDemo,
+      },
     };
-  }
 
-  async componentDidMount() {
-    this.state.pipelineComponents.map(async oneComponent => await this.addComponent(oneComponent.name));
+    // this.state.pipelineComponents.map(async oneComponent => await this.addComponent(oneComponent.name));
   }
 
   addComponent = async type => {
@@ -33,6 +40,7 @@ class App extends React.Component {
         });
       })
       .catch(error => {
+        console.log(error);
         console.error(`"${type}" not yet supported`);
       });
   };

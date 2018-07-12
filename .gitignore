@@ -9,6 +9,10 @@
 # production
 /dist
 
+server/*
+!server/node.js
+!server/preview-inserted-script.js
+
 # misc
 .DS_Store
 .env.local
