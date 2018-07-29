@@ -7,10 +7,10 @@ const config = require('../config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
@@ -57,14 +57,20 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: [ './src/index.js' ],
+  externals: {
+    './config/components': {
+      commonjs2: '../config/components.json',
+      commonjs: '../config/components.json',
+    },
+  },
   output: {
     // The build folder.
-    path: paths.appBuild,
+    path: paths.appBuildServer,
     // Generated JS file names (with nested folders).
     // There will be one main bundle, and one file per asynchronous chunk.
     // We don't currently advertise code splitting but Webpack supports it.
-    filename: 'static/js/[name].[chunkhash:8].js',
+    filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
@@ -248,26 +254,19 @@ module.exports = {
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
-    new InterpolateHtmlPlugin(env.raw),
+
+    // new InterpolateHtmlPlugin(env.raw),
+
     // Generates an `index.html` file with the <script> injected.
+
     new HtmlWebpackPlugin({
+      reactInstancePlaceholder: '<!--react-ssr-outlet-->',
       inject: true,
-      reactInstancePlaceholder: '<div id="root"></div>',
+      filename: path.join(__dirname, '..', 'server', 'dist', 'index-origin.html'),
       template: paths.appHtml,
-      minify: {
-        // removeComments: true,
-        // collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        // minifyJS: true,
-        // minifyCSS: true,
-        // minifyURLs: true,
-      },
-      ...config.dev.HWPPageBaseConfig,
+      ...config.server.HWPPageBaseConfigForServer,
     }),
+
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
@@ -340,6 +339,12 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '..', 'src', 'config'),
+        to: path.join(__dirname, '..', 'server', 'config'),
+      }
+    ]),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

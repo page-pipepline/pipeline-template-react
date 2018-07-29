@@ -12,6 +12,7 @@
 server/*
 !server/node.js
 !server/preview-inserted-script.js
+pipeline-template.zip
 
 # misc
 .DS_Store

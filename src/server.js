@@ -1,18 +1,12 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
 
-import './index.css';
+// import './index.css';
 import App from './App';
 
-const render = () => {
-  let content = renderToString(
-     <App />
-  );
-  return { content };
-}
+const SSR = <App />;
 
 export {
-  render
-};
+  SSR
+}
 
-export default render;
+export default SSR;
