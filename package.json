@@ -52,7 +52,8 @@
     "server": "rm -rf server/dist && rm -rf server/config && node build/build-server.js",
     "template": "node build/server-template-archive.js",
     "render": "node server/node.js",
-    "test": "node build/test.js --env=jsdom"
+    "test": "node build/test.js --env=jsdom",
+    "release": "standard-version"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -100,6 +101,7 @@
     "archiver": "^2.1.1",
     "less": "^3.6.0",
     "less-loader": "^4.1.0",
+    "standard-version": "^4.4.0",
     "webpack-remove-assets-plugin": "^1.0.1"
   }
 }
