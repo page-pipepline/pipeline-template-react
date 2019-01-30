@@ -46,12 +46,12 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node build/start.js",
-    "build": "node build/build.js",
-    "server": "rm -rf server/dist && rm -rf server/config && node build/build-server.js",
-    "template": "node build/server-template-archive.js",
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "server": "rm -rf server/dist && rm -rf server/config && node scripts/build-server.js",
+    "template": "node scripts/server-template-archive.js",
     "render": "node server/node.js",
-    "test": "node build/test.js --env=jsdom",
+    "test": "node scripts/test.js --env=jsdom",
     "release": "standard-version"
   },
   "jest": {

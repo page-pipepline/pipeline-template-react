@@ -6,7 +6,6 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const RemoveAssetsPlugin = require('webpack-remove-assets-plugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
