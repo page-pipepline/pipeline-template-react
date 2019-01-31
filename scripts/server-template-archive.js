@@ -42,7 +42,7 @@ archive.on('error', (err) => {
 archive.pipe(output);
 
 const directoryList = [
-  'build',
+  'scripts',
   'config',
   'server',
   'src'
